@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     end
 
     #signout
-    def destroy
+    # def destroy
 
-    end
+    # end
 end
