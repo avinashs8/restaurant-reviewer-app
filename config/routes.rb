@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :reviews
   resources :users
 
-  # post '/login', to: "sessions#create"
+  post '/login', to: "sessions#create"
   # destroy '/logout', to:  
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
