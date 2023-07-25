@@ -1,12 +1,12 @@
 class SessionsController < ApplicationController
 
     #signin
-    def create
+    # def create
 
-    end
+    # end
 
-    #signout
-    def destroy
+    # #signout
+    # def destroy
 
-    end
+    # end
 end
