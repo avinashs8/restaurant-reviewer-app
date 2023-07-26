@@ -5,16 +5,31 @@ const UserContext = React.createContext()
 
 
 function UserProvider({ children }) {
-const [ restaurants, setRestaurants ] = useState([])
-  
-  useEffect(() =>{
-    fetch('/restaurants')
-    .then(resp => resp.json())
-    .then(data => setRestaurants(data))
+
+  const [ user, setUser ] = useState({})
+
+  useEffect(() => {
+    fetch('/me')
+    .then(resp => resp.json()) 
+    .then(data => setUser(data))
   }, [])
 
+  const login = () => {
+
+  }
+
+  const logout = () => {
+
+  }
+
+  const signup = () => {
+
+  }
+
+
+
   return (
-    <UserContext.Provider value={restaurants}>{children}</UserContext.Provider>
+    <UserContext.Provider value={ {user, login, logout, signup} }>{children}</UserContext.Provider>
   )
 }
 
