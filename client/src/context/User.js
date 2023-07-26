@@ -22,8 +22,8 @@ function UserProvider({ children }) {
 
   }
 
-  const signup = () => {
-
+  const signup = (user) => {
+    setUser(user)
   }
 
 
