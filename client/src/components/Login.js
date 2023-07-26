@@ -25,14 +25,13 @@ function Login() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         username: username,
-        password: password,
-        password_confirmation: passwordConfirmation,
+        password: password
       }),
     })
       .then(resp => resp.json())
       .then(data => {
         if (!data.errors) {
-          signup(data);
+          login(data);
         } else {
           setUsername('');
           setPassword('');
