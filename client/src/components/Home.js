@@ -5,9 +5,10 @@ function Home() {
 
     const { user } = useContext(UserContext)
 
-    if(!user){
-        console.log(user)
-        return (<h1>Please login or signup</h1>)
+    
+
+    if(!user || user.error){
+        return (<h1>Please Login or Signup</h1>)
     }
 
   return (
