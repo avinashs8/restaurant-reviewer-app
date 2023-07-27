@@ -26,22 +26,15 @@ function Login() {
       body: JSON.stringify({
         username: username,
         password: password
-      }),
+      })
     })
-      .then(resp => resp.json())
-      .then(data => {
-        if (!data.errors) {
-          login(data);
-        } else {
-          setUsername('');
-          setPassword('');
-          const errorLis = data.errors.map((e, index) => {
-            return <li key={index}>{e}</li>;
-          });
-          setErrorList(errorLis);
-        }
-      });
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data)
+      login(data);
+    });
   };
+  
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
