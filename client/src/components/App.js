@@ -11,6 +11,13 @@ import { Switch, Route } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
   
+  const [ restaurants, setRestaurants ] = useState([])
+
+  useEffect(() => {
+    fetch('/restaurants')
+    .then(resp => resp.json())
+    .then(data => setRestaurants(data))
+  }, [])
  
   
   return (
@@ -20,7 +27,9 @@ function App() {
         <Route exact path='/' component={Home}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/login' component={Login}/>
-        <Route exact path='/restaurants' component={Restaurants}/>
+        <Route exact path='/restaurants'>
+          <Restaurants restaurants={restaurants}/>
+        </Route>
       </Switch>
     </div>
   );
