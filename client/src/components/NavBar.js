@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { NavLink } from 'react-router-dom';
 import { UserContext } from '../context/User';
 
+
 function NavBar() {
 
   const {user, logout} = useContext(UserContext)
@@ -29,11 +30,11 @@ function NavBar() {
       }}
     >
       <ButtonGroup variant="contained" aria-label="outlined button group" size='large'>
-        <NavLink
-          to="/"
-          exact
-        >
+        <NavLink to="/" exact>
           <Button>Home</Button>
+        </NavLink>
+        <NavLink to="/restaurants" exact>
+          <Button>All Restaurants</Button>
         </NavLink>
         <NavLink to="/logout">
           <Button onClick={logoutUser}>Logout</Button>

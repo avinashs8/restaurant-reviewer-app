@@ -3,11 +3,15 @@ import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import { UserContext } from '../context/User';
 
+
+
+
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorList, setErrorList] = useState([]);
   const { login } = useContext(UserContext);
+ 
 
   const handleUserNameChange = e => {
     setUsername(e.target.value);
@@ -30,8 +34,12 @@ function Login() {
     })
     .then(resp => resp.json())
     .then(data => {
-      console.log(data)
-      login(data);
+      if(!data.error){ login(data) }
+      else{
+        setErrorList(data.error)
+      }
+      
+      
     });
   };
   
