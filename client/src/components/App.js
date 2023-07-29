@@ -1,4 +1,4 @@
-// import './App.css';
+import '../App.css';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/User';
 import NavBar from './NavBar';
@@ -6,6 +6,7 @@ import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
 import Restaurants from './Restaurants';
+import Reviews from './Reviews';
 import { Switch, Route } from 'react-router-dom/cjs/react-router-dom.min';
 
 
@@ -29,6 +30,9 @@ function App() {
         <Route exact path='/login' component={Login}/>
         <Route exact path='/restaurants'>
           <Restaurants restaurants={restaurants}/>
+        </Route>
+        <Route exact path='/restaurants/:id'>
+          <Reviews restaurants={restaurants}/>
         </Route>
       </Switch>
     </div>
