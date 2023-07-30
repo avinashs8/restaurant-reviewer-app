@@ -41,7 +41,7 @@ function Restaurant({ restaurant }) {
             <Stack spacing={1}>
               Reviews:
             <Rating name="half-rating-read" defaultValue={rating / restaurant.reviews.length} precision={0.5} readOnly />
-            <NavLink to={`/restaurants/${restaurant.id}`}>
+            <NavLink to={`/restaurants/${restaurant.id}/reviews`}>
               <Button>All Reviews</Button>
             </NavLink>
             </Stack>

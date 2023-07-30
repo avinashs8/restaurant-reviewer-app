@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { UserContext } from '../context/User';
 
 function AddReviewForm() {
   const [ stars, setStars ] = useState(null)
   const [ content, setContent ] = useState(null)
   const [errorList, setErrorList] = useState([]);
+  const { id } = useParams()
+  const { user } = useContext(UserContext)
+  
 
   const handleStarsChange = e => {
     setStars(e.target.value)
@@ -17,7 +22,28 @@ function AddReviewForm() {
 
   const handleSubmit = e => {
     e.preventDefault()
-
+    fetch(`/restaurants/${id}/reviews`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: user.id,
+        restaurant_id: id,
+        stars: stars, 
+        content: content
+    })})
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data.errors)
+      console.log(data)
+      if(data.errors) {
+        setContent('')
+        setStars('')
+        const errorLis = data.errors.map((e, index) => {
+          return <li key={index}>{e}</li>;
+        });
+        setErrorList(errorLis);
+      }
+    })
   }
 
   return (

@@ -1,14 +1,18 @@
 class ReviewsController < ApplicationController
 
     def index
-        render json: Review.all
+        restaurant = Restaurant.find_by(id: params[:id])
+        
     end
 
     def create
         restaurant = Restaurant.find_by(id: params[:id])
         review = restaurant.reviews.create(reviews_params)
-        review.user = current_user
-        render json: reviewp
+        if review.valid?
+            render json: review, status: :created
+        else
+            render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
     private
@@ -18,6 +22,6 @@ class ReviewsController < ApplicationController
     end
 
     def reviews_params
-        params.permit(:stars, :content)
+        params.permit(:user_id, :restaurant_id, :stars, :content)
     end
 end

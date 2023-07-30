@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import StarIcon from '@mui/icons-material/Star';
 
 function ReviewCard({ review, restaurant }) {
-  console.log(review)
+  
   const renderMultipleTimes = () => {
     const elements = [];
     for (let i = 0; i < review.stars; i++) {
@@ -18,7 +18,7 @@ function ReviewCard({ review, restaurant }) {
   };
 
   const user = restaurant.users.find(u => u.id === review.user_id)
-  console.log(restaurant.users)
+  
 
   return (
     <Card sx={{ minWidth: 275 }}>

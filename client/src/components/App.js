@@ -31,7 +31,7 @@ function App() {
         <Route exact path='/restaurants'>
           <Restaurants restaurants={restaurants}/>
         </Route>
-        <Route exact path='/restaurants/:id'>
+        <Route exact path='/restaurants/:id/reviews'>
           <Reviews restaurants={restaurants}/>
         </Route>
       </Switch>

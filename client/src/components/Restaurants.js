@@ -10,7 +10,7 @@ function Restaurants({ restaurants }) {
         </div>
         ) 
     })
-    console.log(restaurantList)
+    
   return (
     <div className='centered'>{restaurantList}</div>
   )
