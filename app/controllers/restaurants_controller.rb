@@ -4,5 +4,10 @@ class RestaurantsController < ApplicationController
         render json: Restaurant.all 
     end
 
+    def show
+        restaurant = Restaurant.find_by(id: params[:id])
+        render json: restaurant
+    end
+
     
 end
