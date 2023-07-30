@@ -9,7 +9,7 @@ import { Button } from '@mui/material';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom';
 
 function Restaurant({ restaurant }) {
-
+    
     const renderMultipleTimes = () => {
         const elements = [];
         for (let i = 0; i < restaurant.price; i++) {
@@ -17,6 +17,9 @@ function Restaurant({ restaurant }) {
         }
         return elements;
       };
+
+    
+    const rating = restaurant.reviews.reduce((acc, review) => acc + review.stars, 0)
       
 
   return (
@@ -37,7 +40,7 @@ function Restaurant({ restaurant }) {
           </Typography>
             <Stack spacing={1}>
               Reviews:
-            <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
+            <Rating name="half-rating-read" defaultValue={rating / restaurant.reviews.length} precision={0.5} readOnly />
             <NavLink to={`/restaurants/${restaurant.id}`}>
               <Button>All Reviews</Button>
             </NavLink>
