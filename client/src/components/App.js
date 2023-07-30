@@ -32,7 +32,7 @@ function App() {
           <Restaurants restaurants={restaurants}/>
         </Route>
         <Route exact path='/restaurants/:id/reviews'>
-          <Reviews restaurants={restaurants}/>
+          <Reviews restaurants={restaurants} setRestaurants={setRestaurants}/>
         </Route>
       </Switch>
     </div>

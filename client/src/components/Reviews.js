@@ -5,7 +5,7 @@ import { Button } from '@mui/material'
 import AddReviewForm from './AddReviewForm'
 
 
-function Reviews({ restaurants }) {
+function Reviews({ restaurants, setRestaurants }) {
     const [ toggleForm, setToggleForm ] = useState(false)
     const { id } = useParams()
     const restaurant = restaurants.find(r => r.id === parseInt(id))
@@ -26,7 +26,7 @@ function Reviews({ restaurants }) {
                 <Button variant="outlined" onClick={() => setToggleForm(!toggleForm)}>
                     Add New Review
                 </Button>
-                {toggleForm ? <AddReviewForm /> : null}
+                {toggleForm ? <AddReviewForm restaurants={restaurants} setRestaurants={setRestaurants} toggleForm={toggleForm} setToggleForm={setToggleForm}/> : null}
             </div>
         </div>
       );

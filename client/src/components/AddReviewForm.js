@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { UserContext } from '../context/User';
 
-function AddReviewForm() {
+function AddReviewForm({ restaurants, setRestaurants, toggleForm, setToggleForm }) {
   const [ stars, setStars ] = useState(null)
   const [ content, setContent ] = useState(null)
   const [errorList, setErrorList] = useState([]);
@@ -33,8 +33,6 @@ function AddReviewForm() {
     })})
     .then(resp => resp.json())
     .then(data => {
-      console.log(data.errors)
-      console.log(data)
       if(data.errors) {
         setContent('')
         setStars('')
@@ -42,6 +40,20 @@ function AddReviewForm() {
           return <li key={index}>{e}</li>;
         });
         setErrorList(errorLis);
+      } else {
+        setContent('')
+        setStars('')
+        setToggleForm(!toggleForm)
+        const updatedReviews = restaurants.map(r => {
+          if(r.id === parseInt(id)){
+            r.reviews.push(data)
+            return r
+          } else {
+            return r
+          }
+        })
+        setRestaurants(updatedReviews)
+        
       }
     })
   }
