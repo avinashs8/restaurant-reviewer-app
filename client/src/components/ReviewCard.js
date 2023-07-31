@@ -26,8 +26,22 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
   const userOfComment = restaurant.users.find(u => u.id === review.user_id)
 
   const handleDelete = () => {
-    
-  }
+    fetch(`/restaurants/${id}/reviews/${review.id}`, {
+      method: 'DELETE'})
+    .then(() => {
+      const reviewsAfterDelete = restaurants.map(r => {
+        if (r.id === parseInt(id)){
+          const updatedReviews = r.reviews.filter(rev => rev.id !== review.id)
+          return {...r, reviews: updatedReviews}
+        } else{
+          return r
+        }
+      })
+      setRestaurants(reviewsAfterDelete)
+      }
+      )
+    }
+  
   
 
   return (
@@ -45,12 +59,13 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
         </Typography>
       </CardContent>
       <CardActions>
-        {userOfComment.id === user.id ? <><Button size="small" onClick={() => setToggleEditForm(!toggleEditForm)}>Edit Review</Button> <Button>Delete Review</Button> </>
+        {userOfComment.id === user.id ? <><Button size="small" onClick={() => setToggleEditForm(!toggleEditForm)}>Edit Review</Button> <Button onClick={handleDelete}>Delete Review</Button> </>
         : null}
       </CardActions>
       {toggleEditForm ? <EditReviewForm review={review} toggleEditForm={toggleEditForm} setToggleEditForm={setToggleEditForm} restaurants={restaurants} setRestaurants={setRestaurants}/> : null}
     </Card>
   )
 }
+
 
 export default ReviewCard

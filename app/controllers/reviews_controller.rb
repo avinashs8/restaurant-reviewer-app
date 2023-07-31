@@ -30,9 +30,10 @@ class ReviewsController < ApplicationController
         restaurant = Restaurant.find_by(id: params[:restaurant_id])
         review = restaurant.reviews.find_by(id: params[:id])
         if review.valid?
-            review.destroy, status: 204
+            review.destroy
+            head :no_content
         else
-            render json: { errors: review.errors.full_messages }
+            render json: { errors: review.errors.full_messages }, status: :not_found
         end
     end
 
