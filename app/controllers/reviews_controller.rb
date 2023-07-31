@@ -15,6 +15,19 @@ class ReviewsController < ApplicationController
         end
     end
 
+    def update 
+        restaurant = Restaurant.find_by(id: params[:restaurant_id])
+        review = restaurant.reviews.find_by(id: params[:id])
+        review.update(reviews_params)
+        if review.valid?
+            render json: review, status: 200
+        else
+            render json: { errors: review.errors.full_messages }
+        end
+    end
+
+
+
     private
 
     def current_user

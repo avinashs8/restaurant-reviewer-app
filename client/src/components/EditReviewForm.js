@@ -1,12 +1,15 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { UserContext } from "../context/User";
 
-function EditReviewForm({ review }) {
+function EditReviewForm({ review, restaurants, setRestaurants, setToggleEditForm, toggleEditForm }) {
     const [ stars, setStars ] = useState(review.stars)
     const [ content, setContent ] = useState(review.content)
     const [errorList, setErrorList] = useState([]);
+    const { id } = useParams()
+    const { user } = useContext(UserContext)
 
     const handleStarsChange = e => {
         setStars(e.target.value)
@@ -18,8 +21,48 @@ function EditReviewForm({ review }) {
 
     const handleSubmit = e => {
         e.preventDefault()
-        
+        fetch(`/restaurants/${id}/reviews/${review.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              user_id: user.id,
+              restaurant_id: id,
+              stars: stars, 
+              content: content  
+        })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            if(data.errors){
+                setContent('')
+                setStars('')
+                const errorLis = data.errors.map((e, index) => {
+                  return <li key={index}>{e}</li>;
+                });
+                setErrorList(errorLis); 
+            } else {
+                setContent('')
+                setStars('')
+                setToggleEditForm(!toggleEditForm)
+                const updatedReviews = restaurants.map(r => {
+                    if (r.id === parseInt(id)) {
+                        const updatedResReviews = r.reviews.map(review => {
+                            if (review.id === data.id) {
+                                return data; 
+                            } else {
+                                return review; 
+                            }
+                        });
+                        return { ...r, reviews: updatedResReviews };
+                    } else {
+                        return r; 
+                    }
+                });
+                setRestaurants(updatedReviews)
+            }
+        })
     }
+
 
 
   return (

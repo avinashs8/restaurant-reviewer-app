@@ -15,7 +15,7 @@ function Reviews({ restaurants, setRestaurants }) {
     }
   
     const reviewsList = restaurant.reviews.map(review => {
-      return <ReviewCard key={review.id} review={review} restaurant={restaurant} />;
+      return <ReviewCard key={review.id} review={review} restaurant={restaurant} restaurants={restaurants} setRestaurants={setRestaurants}/>;
     });
   
     return (
