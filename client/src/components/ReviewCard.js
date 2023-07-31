@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { yellow } from '@mui/material/colors';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -6,9 +6,15 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import StarIcon from '@mui/icons-material/Star';
+import { UserContext } from '../context/User';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import EditReviewForm from './EditReviewForm';
 
 function ReviewCard({ review, restaurant }) {
-  
+  const { user } = useContext(UserContext)
+  const { id } = useParams()
+  const [ toggleEditForm, setToggleEditForm ] = useState(false)
+
   const renderMultipleTimes = () => {
     const elements = [];
     for (let i = 0; i < review.stars; i++) {
@@ -17,7 +23,7 @@ function ReviewCard({ review, restaurant }) {
     return elements;
   };
 
-  const user = restaurant.users.find(u => u.id === review.user_id)
+  const userOfComment = restaurant.users.find(u => u.id === review.user_id)
   
 
   return (
@@ -31,12 +37,14 @@ function ReviewCard({ review, restaurant }) {
           <br />
         </Typography>
         <Typography variant="body2">
-          - {user.username}
+          - {userOfComment.username}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        {userOfComment.id === user.id ? <><Button size="small" onClick={() => setToggleEditForm(!toggleEditForm)}>Edit Review</Button> <Button>Delete Review</Button> </>
+        : null}
       </CardActions>
+      {toggleEditForm ? <EditReviewForm review={review}/> : null}
     </Card>
   )
 }

@@ -6,31 +6,39 @@ import AddReviewForm from './AddReviewForm'
 
 
 function Reviews({ restaurants, setRestaurants }) {
-    const [ toggleForm, setToggleForm ] = useState(false)
-    const { id } = useParams()
-    const restaurant = restaurants.find(r => r.id === parseInt(id))
-    
-
+    const [toggleForm, setToggleForm] = useState(false);
+    const { id } = useParams();
+    const restaurant = restaurants.find(r => r.id === parseInt(id));
+  
+    if (!restaurant) {
+      return <div>Loading...</div>;
+    }
+  
     const reviewsList = restaurant.reviews.map(review => {
-        return <ReviewCard key={review.id} review={review} restaurant={restaurant}/>
-    })
-
-
-    
+      return <ReviewCard key={review.id} review={review} restaurant={restaurant} />;
+    });
+  
     return (
-        <div className='centered' >
-            <div style={{ display: 'block' }}>
-                <h1>{restaurant.name} Reviews</h1>
-                <div>{reviewsList}</div>
-                <br/>
-                <Button variant="outlined" onClick={() => setToggleForm(!toggleForm)}>
-                    Add New Review
-                </Button>
-                {toggleForm ? <AddReviewForm restaurants={restaurants} setRestaurants={setRestaurants} toggleForm={toggleForm} setToggleForm={setToggleForm}/> : null}
-            </div>
+      <div className='centered'>
+        <div style={{ display: 'block' }}>
+          <h1>{restaurant.name} Reviews</h1>
+          <div>{reviewsList}</div>
+          <br />
+          <Button variant="outlined" onClick={() => setToggleForm(!toggleForm)}>
+            Add New Review
+          </Button>
+          {toggleForm ? (
+            <AddReviewForm
+              restaurants={restaurants}
+              setRestaurants={setRestaurants}
+              toggleForm={toggleForm}
+              setToggleForm={setToggleForm}
+            />
+          ) : null}
         </div>
-      );
-      
-}
-
-export default Reviews
+      </div>
+    );
+  }
+  
+  export default Reviews;
+  
