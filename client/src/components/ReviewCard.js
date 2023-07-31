@@ -24,6 +24,10 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
   };
 
   const userOfComment = restaurant.users.find(u => u.id === review.user_id)
+
+  const handleDelete = () => {
+    
+  }
   
 
   return (

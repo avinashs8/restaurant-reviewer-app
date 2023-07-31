@@ -26,6 +26,16 @@ class ReviewsController < ApplicationController
         end
     end
 
+    def destroy
+        restaurant = Restaurant.find_by(id: params[:restaurant_id])
+        review = restaurant.reviews.find_by(id: params[:id])
+        if review.valid?
+            review.destroy, status: 204
+        else
+            render json: { errors: review.errors.full_messages }
+        end
+    end
+
 
 
     private
