@@ -15,6 +15,8 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
   const { id } = useParams()
   const [ toggleEditForm, setToggleEditForm ] = useState(false)
 
+  
+
   const renderMultipleTimes = () => {
     const elements = [];
     for (let i = 0; i < review.stars; i++) {
@@ -23,7 +25,13 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
     return elements;
   };
 
-  const userOfComment = restaurant.users.find(u => u.id === review.user_id)
+
+  
+
+  const username = restaurant.users.find((u) => u.id === review.user_id)
+  if (!username){
+    return <h1>Loading...</h1>
+  }
 
   const handleDelete = () => {
     fetch(`/restaurants/${id}/reviews/${review.id}`, {
@@ -54,12 +62,10 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
           {review.content}
           <br />
         </Typography>
-        <Typography variant="body2">
-          - {userOfComment.username}
-        </Typography>
+        {username ? <Typography variant="body2">- {username.username}</Typography> : <Typography variant="body2">- Unknown User</Typography>}
       </CardContent>
       <CardActions>
-        {userOfComment.id === user.id ? <><Button size="small" onClick={() => setToggleEditForm(!toggleEditForm)}>Edit Review</Button> <Button onClick={handleDelete}>Delete Review</Button> </>
+        {username.id === user.id ? <><Button size="small" onClick={() => setToggleEditForm(!toggleEditForm)}>Edit Review</Button> <Button onClick={handleDelete}>Delete Review</Button> </>
         : null}
       </CardActions>
       {toggleEditForm ? <EditReviewForm review={review} toggleEditForm={toggleEditForm} setToggleEditForm={setToggleEditForm} restaurants={restaurants} setRestaurants={setRestaurants}/> : null}
