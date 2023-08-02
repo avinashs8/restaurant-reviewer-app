@@ -26,13 +26,27 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
   };
 
 
-  
+  const restaurantWithId = restaurants.find(r => r.id === parseInt(id));
 
-  const username = restaurant.users.find((u) => u.id === review.user_id)
-  if (!username){
-    return <h1>Loading...</h1>
+  
+  if (!restaurantWithId) {
+    return <h1>Loading...</h1>;
   }
 
+  
+  const reviewer = restaurantWithId.users.find(u => u.id === review.user_id);
+
+  
+  if (!reviewer) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (!user) {
+    return <h1>Loading...</h1>;
+  }
+
+
+  
   const handleDelete = () => {
     fetch(`/restaurants/${id}/reviews/${review.id}`, {
       method: 'DELETE'})
@@ -62,10 +76,10 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
           {review.content}
           <br />
         </Typography>
-        {username ? <Typography variant="body2">- {username.username}</Typography> : <Typography variant="body2">- Unknown User</Typography>}
+        {reviewer ? <Typography variant="body2">- {reviewer.username}</Typography> : <Typography variant="body2">- Unknown User</Typography>}
       </CardContent>
       <CardActions>
-        {username.id === user.id ? <><Button size="small" onClick={() => setToggleEditForm(!toggleEditForm)}>Edit Review</Button> <Button onClick={handleDelete}>Delete Review</Button> </>
+        {reviewer.id === user.id ? <><Button size="small" onClick={() => setToggleEditForm(!toggleEditForm)}>Edit Review</Button> <Button onClick={handleDelete}>Delete Review</Button> </>
         : null}
       </CardActions>
       {toggleEditForm ? <EditReviewForm review={review} toggleEditForm={toggleEditForm} setToggleEditForm={setToggleEditForm} restaurants={restaurants} setRestaurants={setRestaurants}/> : null}
