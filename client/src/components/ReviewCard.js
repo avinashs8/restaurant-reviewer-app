@@ -27,26 +27,13 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
 
 
   const restaurantWithId = restaurants.find(r => r.id === parseInt(id));
-
-  
-  if (!restaurantWithId) {
-    return <h1>Loading...</h1>;
-  }
-
-  
   const reviewer = restaurantWithId.users.find(u => u.id === review.user_id);
-
   
-  if (!reviewer) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (!user) {
+  if (!restaurantWithId || !reviewer || !user) {
     return <h1>Loading...</h1>;
   }
 
 
-  
   const handleDelete = () => {
     fetch(`/restaurants/${id}/reviews/${review.id}`, {
       method: 'DELETE'})
