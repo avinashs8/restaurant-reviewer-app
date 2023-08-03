@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { UserContext } from '../context/User';
 
 function AddReviewForm({ restaurants, setRestaurants, toggleForm, setToggleForm }) {
-  const [ stars, setStars ] = useState(null)
-  const [ content, setContent ] = useState(null)
+  const [ stars, setStars ] = useState('')
+  const [ content, setContent ] = useState('')
   const [errorList, setErrorList] = useState([]);
   const { id } = useParams()
   const { user } = useContext(UserContext)
@@ -47,6 +47,7 @@ function AddReviewForm({ restaurants, setRestaurants, toggleForm, setToggleForm 
         const updatedReviews = restaurants.map(r => {
           if(r.id === parseInt(id)){
             r.reviews.push(data)
+            r.users.push(user)
             return r
           } else {
             return r

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 
-function AddRestaurantForm({ restaurants, toggleForm, setToggleForm }) {
+function AddRestaurantForm({ restaurants, toggleForm, setToggleForm, setRestaurants }) {
 
     const [ name, setName ] = useState('')
     const [ cuisine, setCuisine ] = useState('')
@@ -28,7 +28,41 @@ function AddRestaurantForm({ restaurants, toggleForm, setToggleForm }) {
 
     const handleSubmit = e => {
         e.preventDefault()
-        
+        fetch('/restaurants', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name,
+              cuisine: cuisine,
+              price: price, 
+              location: location
+          })})
+          .then(resp=> resp.json())
+          .then(data => {
+            if(data.errors){
+                setName('')
+                setCuisine('')
+                setPrice('')
+                setLocation('')
+                const errorLis = data.errors.map((e, index) => {
+                    return <li key={index}>{e}</li>
+                  })
+                  setErrorList(errorLis)
+            } else {
+                setName('')
+                setCuisine('')
+                setPrice('')
+                setLocation('')
+                setToggleForm(!toggleForm)
+                const newRestaurants = [...restaurants, {
+                    name: name,
+                    cuisine: cuisine,
+                    price: price, 
+                    location: location
+                }]
+                setRestaurants(newRestaurants)
+            }
+          })   
     }
 
 

@@ -9,9 +9,10 @@ function Reviews({ restaurants, setRestaurants }) {
     const [toggleForm, setToggleForm] = useState(false);
     const { id } = useParams();
     const restaurant = restaurants.find(r => r.id === parseInt(id));
-  
+    
     if (!restaurant) {
       return <div>Loading...</div>;
+
     }
   
     const reviewsList = restaurant.reviews.map(review => {

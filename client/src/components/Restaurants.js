@@ -3,7 +3,7 @@ import Restaurant from './Restaurant'
 import { Button } from '@mui/material'
 import AddRestaurantForm from './AddRestaurantForm'
 
-function Restaurants({ restaurants }) {
+function Restaurants({ restaurants, setRestaurants }) {
 
   const [ toggleForm, setToggleForm ] = useState(false)
     const restaurantList = restaurants.map((restaurant)=>{
@@ -24,7 +24,7 @@ function Restaurants({ restaurants }) {
       </div>
       <br/>
       <div className='centered'>
-        {toggleForm ? <AddRestaurantForm restaurants={restaurants} setToggleForm={setToggleForm} toggleForm={toggleForm}/> : null }
+        {toggleForm ? <AddRestaurantForm restaurants={restaurants} setToggleForm={setToggleForm} toggleForm={toggleForm} setRestaurants={setRestaurants}/> : null }
         
       </div>
     </div>

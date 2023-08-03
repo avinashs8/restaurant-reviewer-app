@@ -19,7 +19,7 @@ function Restaurant({ restaurant }) {
       };
 
     
-    const rating = restaurant.reviews.reduce((acc, review) => acc + review.stars, 0)
+    const rating = restaurant.reviews?.reduce((acc, review) => acc + review.stars, 0)
       
 
   return (
@@ -40,7 +40,7 @@ function Restaurant({ restaurant }) {
           </Typography>
             <Stack spacing={1}>
               Reviews:
-            <Rating name="half-rating-read" value={rating / restaurant.reviews.length} precision={0.5} readOnly />
+            <Rating name="half-rating-read" value={rating / restaurant.reviews?.length} precision={0.5} readOnly />
             <NavLink to={`/restaurants/${restaurant.id}/reviews`}>
               <Button>All Reviews</Button>
             </NavLink>

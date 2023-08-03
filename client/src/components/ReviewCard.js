@@ -14,7 +14,7 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
   const { user } = useContext(UserContext)
   const { id } = useParams()
   const [ toggleEditForm, setToggleEditForm ] = useState(false)
-
+  
   
 
   const renderMultipleTimes = () => {
@@ -26,10 +26,14 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
   };
 
 
-  const restaurantWithId = restaurants.find(r => r.id === parseInt(id));
-  const reviewer = restaurantWithId.users.find(u => u.id === review.user_id);
+  const restaurantWithId = restaurants.find(r => r.id === parseInt(id))
+  const reviewer = restaurantWithId.users.find(u => u.id === review.user_id)
+   
   
-  if (!restaurantWithId || !reviewer || !user) {
+  
+  
+  if (!restaurantWithId || !user || !reviewer) {
+    debugger
     return <h1>Loading...</h1>;
   }
 

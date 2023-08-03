@@ -36,6 +36,9 @@ function NavBar() {
         <NavLink to="/restaurants" exact>
           <Button>All Restaurants</Button>
         </NavLink>
+        <NavLink to="/myreviews" exact>
+          <Button>My Reviews</Button>
+        </NavLink>
         <NavLink to="/logout">
           <Button onClick={logoutUser}>Logout</Button>
         </NavLink>

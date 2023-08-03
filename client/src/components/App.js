@@ -29,11 +29,12 @@ function App() {
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/restaurants'>
-          <Restaurants restaurants={restaurants}/>
+          <Restaurants restaurants={restaurants} setRestaurants={setRestaurants}/>
         </Route>
         <Route exact path='/restaurants/:id/reviews'>
           <Reviews restaurants={restaurants} setRestaurants={setRestaurants}/>
         </Route>
+        <Route exact path='/myreviews'/>
       </Switch>
     </div>
   );
