@@ -16,8 +16,8 @@ function NavBar() {
       logout()
     })
   }
-
-  if(user){
+  
+  if(user && !user?.error){
     return(
     <Box
       sx={{
