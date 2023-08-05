@@ -6,4 +6,14 @@
 p {
     display: block;
   }
+
+  .restaurant-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+  }
   
+  .restaurant-item {
+    width: 23%; 
+    margin-bottom: 10px;
+  }

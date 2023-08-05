@@ -8,7 +8,7 @@ function Restaurants({ restaurants, setRestaurants }) {
   const [ toggleForm, setToggleForm ] = useState(false)
     const restaurantList = restaurants.map((restaurant)=>{
         return (
-        <div style={{ marginBottom: '10px' }} key={restaurant.id}>
+        <div style={{ marginBottom: '10px' }} key={restaurant.id} className='restaurant-item'>
           <Restaurant  restaurant={restaurant}/>
         </div>
         ) 
@@ -16,7 +16,7 @@ function Restaurants({ restaurants, setRestaurants }) {
     
   return (
     <div >
-      <div className='centered'>{restaurantList}</div>
+      <div className='centered restaurant-container' >{restaurantList}</div>
       <br/>
       <div className='centered'>
         <Button onClick={() => setToggleForm(!toggleForm)}>Add New Restaurant</Button>

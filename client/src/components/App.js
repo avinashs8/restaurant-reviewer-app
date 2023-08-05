@@ -7,6 +7,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Restaurants from './Restaurants';
 import Reviews from './Reviews';
+import MyReviews from './MyReviews';
 import { Switch, Route } from 'react-router-dom/cjs/react-router-dom.min';
 
 
@@ -34,7 +35,9 @@ function App() {
         <Route exact path='/restaurants/:id/reviews'>
           <Reviews restaurants={restaurants} setRestaurants={setRestaurants}/>
         </Route>
-        <Route exact path='/myreviews'/>
+        <Route exact path='/myreviews'>
+          <MyReviews restaurants={restaurants} />
+        </Route>
       </Switch>
     </div>
   );
