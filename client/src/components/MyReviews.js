@@ -9,9 +9,17 @@ function MyReviews({ restaurants }) {
        return <h1>Loading...</h1>
     }
     
-    const myReviews = user.reviews.map(review => {
+    
+
+    const reviewsByUser = restaurants.flatMap((restaurant) =>
+        restaurant.reviews.filter((review) => review.user_id === user.id)
+    );
+
+    const myReviews = reviewsByUser.map(review => {
         return <MyReviewCard key={review.id} review={review} restaurants={restaurants}/>
     })
+
+    
 
     
   
