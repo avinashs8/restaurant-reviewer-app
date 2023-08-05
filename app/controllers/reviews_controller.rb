@@ -1,8 +1,8 @@
 class ReviewsController < ApplicationController
 
     def index
-        restaurant = Restaurant.find_by(id: params[:id])
-        
+        reviews = Review.all 
+        render json: reviews
     end
 
     def create
