@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from 'react-router-dom';
 import { UserContext } from "../context/User";
 
 function EditReviewForm({ review, restaurants, setRestaurants, setToggleEditForm, toggleEditForm }) {

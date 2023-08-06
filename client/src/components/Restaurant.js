@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 import { Button } from '@mui/material';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Restaurant({ restaurant }) {
     

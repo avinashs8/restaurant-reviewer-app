@@ -8,7 +8,7 @@ import Signup from './Signup';
 import Restaurants from './Restaurants';
 import Reviews from './Reviews';
 import MyReviews from './MyReviews';
-import { Switch, Route } from 'react-router-dom/cjs/react-router-dom.min';
+import { Routes, Route } from 'react-router-dom';
 
 
 function App() {
@@ -25,20 +25,14 @@ function App() {
   return (
     <div className="App">
       <NavBar/>
-      <Switch>
-        <Route exact path='/' component={Home}/>
-        <Route exact path='/signup' component={Signup}/>
-        <Route exact path='/login' component={Login}/>
-        <Route exact path='/restaurants'>
-          <Restaurants restaurants={restaurants} setRestaurants={setRestaurants}/>
-        </Route>
-        <Route exact path='/restaurants/:id/reviews'>
-          <Reviews restaurants={restaurants} setRestaurants={setRestaurants}/>
-        </Route>
-        <Route exact path='/myreviews'>
-          <MyReviews restaurants={restaurants} />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route  path='/' element={<Home/>}/>
+        <Route  path='/signup' element={<Signup />}/>
+        <Route  path='/login' element={<Login />}/>
+        <Route  path='/restaurants' element={<Restaurants restaurants={restaurants} setRestaurants={setRestaurants}/>} />
+        <Route  path='/restaurants/:id/reviews'element={<Reviews restaurants={restaurants} setRestaurants={setRestaurants}/>} />
+        <Route  path='/myreviews' element={<MyReviews restaurants={restaurants} />}/>
+      </Routes>
     </div>
   );
 }

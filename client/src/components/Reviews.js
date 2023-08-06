@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom/cjs/react-router-dom'
+import { useParams } from 'react-router-dom'
 import ReviewCard from './ReviewCard'
 import { Button } from '@mui/material'
 import AddReviewForm from './AddReviewForm'

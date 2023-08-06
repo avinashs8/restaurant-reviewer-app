@@ -1,8 +1,9 @@
 class ReviewsController < ApplicationController
+    before_action :authorize
 
     def index
         reviews = Review.all 
-        render json: reviews
+        render json: reviews, status: :ok
     end
 
     def create
@@ -47,5 +48,9 @@ class ReviewsController < ApplicationController
 
     def reviews_params
         params.permit(:user_id, :restaurant_id, :stars, :content)
+    end
+
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 end

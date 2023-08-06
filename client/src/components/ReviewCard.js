@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import StarIcon from '@mui/icons-material/Star';
 import { UserContext } from '../context/User';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from 'react-router-dom';
 import EditReviewForm from './EditReviewForm';
 
 function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
@@ -33,7 +33,6 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
   
   
   if (!restaurantWithId || !user || !reviewer) {
-    debugger
     return <h1>Loading...</h1>;
   }
 
