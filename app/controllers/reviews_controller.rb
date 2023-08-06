@@ -19,22 +19,28 @@ class ReviewsController < ApplicationController
     def update 
         restaurant = Restaurant.find_by(id: params[:restaurant_id])
         review = restaurant.reviews.find_by(id: params[:id])
-        review.update(reviews_params)
-        if review.valid?
-            render json: review, status: 200
-        else
-            render json: { errors: review.errors.full_messages }
+        if review.user.id == session[:user_id]
+            if review.update(reviews_params)
+              render json: review, status: :ok
+            else
+              render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
+            end
+          else
+            render json: { error: "Not authorized" }, status: :unauthorized
         end
     end
 
     def destroy
         restaurant = Restaurant.find_by(id: params[:restaurant_id])
         review = restaurant.reviews.find_by(id: params[:id])
-        if review.valid?
-            review.destroy
-            head :no_content
+        if review.user.id == session[:user_id] 
+            if review.destroy
+                head :no_content
+            else
+                render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
+            end
         else
-            render json: { errors: review.errors.full_messages }, status: :not_found
+            render json: { errors: review.errors.full_messages }, status: :unauthorized
         end
     end
 

@@ -14,12 +14,13 @@ import { Routes, Route } from 'react-router-dom';
 function App() {
   
   const [ restaurants, setRestaurants ] = useState([])
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     fetch('/restaurants')
     .then(resp => resp.json())
     .then(data => setRestaurants(data))
-  }, [])
+  }, [user])
  
   
   return (
