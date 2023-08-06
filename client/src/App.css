@@ -17,3 +17,17 @@ p {
     width: 23%; 
     margin-bottom: 10px;
   }
+
+  .paragraph-container {
+    display: flex;
+    align-items: center;
+    width: 70%; 
+    margin: 10px auto;
+  }
+  
+  .paragraph-container p {
+    word-wrap: break-word; 
+    white-space: normal; 
+    justify-content: center;
+  }
+  

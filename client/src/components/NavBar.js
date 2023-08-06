@@ -4,16 +4,18 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import { NavLink } from 'react-router-dom';
 import { UserContext } from '../context/User';
-
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
 
   const {user, logout} = useContext(UserContext)
+  const navigate = useNavigate()
   
   const logoutUser = () => {
     fetch('/logout')
     .then( () => {
       logout()
+      navigate('/')
     })
   }
   
