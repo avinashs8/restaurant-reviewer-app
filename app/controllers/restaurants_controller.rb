@@ -2,12 +2,17 @@ class RestaurantsController < ApplicationController
     before_action :authorize
 
     def index
-        render json: Restaurant.all 
+        render json: Restaurant.all, status: :ok
     end
 
     def show
         restaurant = Restaurant.find_by(id: params[:id])
-        render json: restaurant
+    
+        if restaurant
+          render json: restaurant, status: :ok
+        else
+          render json: { error: "Restaurant not found" }, status: :not_found
+        end
     end
 
     def create
