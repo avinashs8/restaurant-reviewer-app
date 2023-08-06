@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/restaurants/:id/reviews', to: "reviews#index"
   patch '/restaurants/:restaurant_id/reviews/:id', to: "reviews#update"
   delete '/restaurants/:restaurant_id/reviews/:id', to: "reviews#destroy"
+  delete '/restaurants/:id', to: "restaurants#destroy"
   get '/reviews', to: "reviews#index"
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

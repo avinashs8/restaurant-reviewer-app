@@ -30,7 +30,7 @@ function App() {
         <Route  path='/signup' element={<Signup />}/>
         <Route  path='/login' element={<Login />}/>
         <Route  path='/restaurants' element={<Restaurants restaurants={restaurants} setRestaurants={setRestaurants}/>} />
-        <Route  path='/restaurants/:id/reviews'element={<Reviews restaurants={restaurants} setRestaurants={setRestaurants}/>} />
+        <Route  path='/restaurants/:id/reviews' element={<Reviews restaurants={restaurants} setRestaurants={setRestaurants}/>} />
         <Route  path='/myreviews' element={<MyReviews restaurants={restaurants} />}/>
       </Routes>
     </div>

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import { UserContext } from '../context/User';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -11,7 +11,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errorList, setErrorList] = useState([]);
   const { login } = useContext(UserContext);
- 
+  const navigate = useNavigate()
 
   const handleUserNameChange = e => {
     setUsername(e.target.value);
@@ -34,12 +34,13 @@ function Login() {
     })
     .then(resp => resp.json())
     .then(data => {
-      if(!data.error){ login(data) }
+      if(!data.error){ 
+        login(data) 
+        navigate('/')
+      }
       else{
         setErrorList(data.error)
       }
-      
-      
     });
   };
   

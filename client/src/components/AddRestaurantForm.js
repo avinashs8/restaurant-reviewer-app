@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 
+
 function AddRestaurantForm({ restaurants, toggleForm, setToggleForm, setRestaurants }) {
 
     const [ name, setName ] = useState('')
@@ -54,12 +55,7 @@ function AddRestaurantForm({ restaurants, toggleForm, setToggleForm, setRestaura
                 setPrice('')
                 setLocation('')
                 setToggleForm(!toggleForm)
-                const newRestaurants = [...restaurants, {
-                    name: name,
-                    cuisine: cuisine,
-                    price: price, 
-                    location: location
-                }]
+                const newRestaurants = [...restaurants, data]
                 setRestaurants(newRestaurants)
             }
           })   
