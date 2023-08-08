@@ -16,31 +16,51 @@ class ReviewsController < ApplicationController
         end
     end
 
+    # def update 
+    #     restaurant = Restaurant.find_by(id: params[:restaurant_id])
+    #     review = restaurant.reviews.find_by(id: params[:id])
+    #     if review.user.id == session[:user_id]
+    #         if review.update(reviews_params)
+    #           render json: review, status: :ok
+    #         else
+    #           render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
+    #         end
+    #       else
+    #         render json: { error: "Not authorized" }, status: :unauthorized
+    #     end
+    # end
+
     def update 
-        restaurant = Restaurant.find_by(id: params[:restaurant_id])
-        review = restaurant.reviews.find_by(id: params[:id])
-        if review.user.id == session[:user_id]
-            if review.update(reviews_params)
-              render json: review, status: :ok
-            else
-              render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
-            end
-          else
-            render json: { error: "Not authorized" }, status: :unauthorized
+        user = User.find_by(id: session[:user_id])
+        review = user.reviews.find_by(id: params[:id])
+        if review.update(reviews_params)
+            render json: review, status: :ok 
+        else
+            render json: { errors: review.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
+    # def destroy
+    #     restaurant = Restaurant.find_by(id: params[:restaurant_id])
+    #     review = restaurant.reviews.find_by(id: params[:id])
+    #     if review.user.id == session[:user_id] 
+    #         if review.destroy
+    #             head :no_content
+    #         else
+    #             render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
+    #         end
+    #     else
+    #         render json: { errors: review.errors.full_messages }, status: :unauthorized
+    #     end
+    # end
+
     def destroy
-        restaurant = Restaurant.find_by(id: params[:restaurant_id])
-        review = restaurant.reviews.find_by(id: params[:id])
-        if review.user.id == session[:user_id] 
-            if review.destroy
-                head :no_content
-            else
-                render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
-            end
+        user = User.find_by(id: session[:user_id])
+        review = user.reviews.find_by(id: params[:id])
+        if user.destroy 
+            head :no_content
         else
-            render json: { errors: review.errors.full_messages }, status: :unauthorized
+            render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
         end
     end
 

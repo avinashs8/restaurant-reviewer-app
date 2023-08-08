@@ -15,9 +15,15 @@ function MyReviews({ restaurants }) {
         restaurant.reviews.filter((review) => review.user_id === user.id)
     );
 
+    
+
     const myReviews = reviewsByUser.map(review => {
         return <MyReviewCard key={review.id} review={review} restaurants={restaurants}/>
     })
+
+    // const myReviews = user.reviews.map(review => {
+    //     return <MyReviewCard key={review.id} review={review} restaurants={restaurants}/>
+    // })
 
     
 
