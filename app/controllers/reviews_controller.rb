@@ -57,7 +57,7 @@ class ReviewsController < ApplicationController
     def destroy
         user = User.find_by(id: session[:user_id])
         review = user.reviews.find_by(id: params[:id])
-        if user.destroy 
+        if review.destroy 
             head :no_content
         else
             render json: { errors: review.errors.full_messages }, status: :unprocessable_entity
