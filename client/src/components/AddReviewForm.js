@@ -9,7 +9,7 @@ function AddReviewForm({ restaurants, setRestaurants, toggleForm, setToggleForm 
   const [ content, setContent ] = useState('')
   const [errorList, setErrorList] = useState([]);
   const { id } = useParams()
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   
 
   const handleStarsChange = e => {
@@ -44,7 +44,7 @@ function AddReviewForm({ restaurants, setRestaurants, toggleForm, setToggleForm 
         setContent('')
         setStars('')
         setToggleForm(!toggleForm)
-        const updatedReviews = restaurants.map(r => {
+        const updatedRestaurants = restaurants.map(r => {
           if(r.id === parseInt(id)){
             r.reviews.push(data)
             r.users.push(user)
@@ -53,8 +53,10 @@ function AddReviewForm({ restaurants, setRestaurants, toggleForm, setToggleForm 
             return r
           }
         })
-        setRestaurants(updatedReviews)
-        
+        setRestaurants(updatedRestaurants)
+        const updatedUserReviews = [...user.reviews, data]
+        const updatedUser = {...user, reviews: updatedUserReviews}
+        setUser(updatedUser)
       }
     })
   }

@@ -34,6 +34,7 @@ class RestaurantsController < ApplicationController
         end
     end
 
+    
 
     private
 

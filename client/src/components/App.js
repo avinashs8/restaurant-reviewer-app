@@ -8,6 +8,7 @@ import Signup from './Signup';
 import Restaurants from './Restaurants';
 import Reviews from './Reviews';
 import MyReviews from './MyReviews';
+import AllReviewers from './AllReviewers';
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route  path='/restaurants' element={<Restaurants restaurants={restaurants} setRestaurants={setRestaurants}/>} />
         <Route  path='/restaurants/:id/reviews' element={<Reviews restaurants={restaurants} setRestaurants={setRestaurants}/>} />
         <Route  path='/myreviews' element={<MyReviews restaurants={restaurants} />}/>
+        <Route path='/restaurants/:id/users' element={<AllReviewers restaurants={restaurants}/>}/>
       </Routes>
     </div>
   );

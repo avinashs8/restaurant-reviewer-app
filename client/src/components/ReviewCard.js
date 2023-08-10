@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import EditReviewForm from './EditReviewForm';
 
 function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const { id } = useParams()
   const [ toggleEditForm, setToggleEditForm ] = useState(false)
   
@@ -50,6 +50,9 @@ function ReviewCard({ review, restaurant, restaurants, setRestaurants }) {
         }
       })
       setRestaurants(reviewsAfterDelete)
+      const updatedUserReviews = user.reviews.filter(rev => rev.id !== review.id)
+      const updatedUser = { ...user, reviews: updatedUserReviews }
+      setUser(updatedUser)
       }
       )
     }

@@ -7,8 +7,11 @@ import Typography from '@mui/material/Typography';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 import { Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function Restaurant({ restaurant }) {
+
+  const { id } = useParams()
     
     const renderMultipleTimes = () => {
         const elements = [];
@@ -43,6 +46,9 @@ function Restaurant({ restaurant }) {
             <Rating name="half-rating-read" value={rating / restaurant.reviews?.length} precision={0.5} readOnly />
             <NavLink to={`/restaurants/${restaurant.id}/reviews`}>
               <Button>All Reviews</Button>
+            </NavLink>
+            <NavLink to={`/restaurants/${restaurant.id}/users`}>
+              <Button>All Users Who Reviewed This Restaurant</Button>
             </NavLink>
             </Stack>
         </CardContent>

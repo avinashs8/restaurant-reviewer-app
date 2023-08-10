@@ -9,7 +9,7 @@ function EditReviewForm({ review, restaurants, setRestaurants, setToggleEditForm
     const [ content, setContent ] = useState(review.content)
     const [errorList, setErrorList] = useState([]);
     const { id } = useParams()
-    const { user } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
 
     const handleStarsChange = e => {
         setStars(e.target.value)
@@ -59,6 +59,15 @@ function EditReviewForm({ review, restaurants, setRestaurants, setToggleEditForm
                     }
                 });
                 setRestaurants(updatedReviews)
+                const updatedUserReviews = user.reviews.map(review => {
+                  if(review.id === data.id){
+                    return data
+                  } else {
+                    return review
+                  }
+                })
+                const updatedUser = {...user, reviews: updatedUserReviews }
+                setUser(updatedUser)
             }
         })
     }
